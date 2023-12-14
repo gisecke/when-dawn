@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjqrulmkgl4pl"]
+
+[ext_resource type="Script" path="res://scripts/characters/enemies/enemy_spawner.gd" id="1_qd06t"]
+
+[node name="EnemySpawner" type="Marker2D" groups=["enemy_spawner", "spawn_timer"]]
+script = ExtResource("1_qd06t")
+enemies = {
+"Archer Skeleton": "res://scenes/enemies/archer_skeleton/archer_skeleton_enemy.tscn",
+"Bat": "res://scenes/enemies/bat/bat_scene.tscn",
+"Bone Skeleton": "res://scenes/enemies/skeleton/skeleton_enemy.tscn",
+"Necromance": "res://scenes/enemies/bat/bat_scene.tscn",
+"Wolf": "res://scenes/enemies/wolf/wolf_enemy.tscn"
+}
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="on_spawn_timer_timeout"]

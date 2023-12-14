@@ -1,0 +1,39 @@
+[gd_scene load_steps=9 format=3 uid="uid://b6jywxmdei5g"]
+
+[ext_resource type="Script" path="res://scripts/level/level.gd" id="1_kbtaa"]
+[ext_resource type="PackedScene" uid="uid://do6nj4ac12i8x" path="res://scenes/enviroment/tile_map.tscn" id="2_fgxam"]
+[ext_resource type="PackedScene" uid="uid://bscgexv8f6s8c" path="res://scenes/interface/hud.tscn" id="4_m3tqh"]
+[ext_resource type="AudioStream" uid="uid://c0vinmis8jab0" path="res://assets/sounds/music/intro_theme_forest.ogg" id="5_lwla4"]
+[ext_resource type="PackedScene" uid="uid://fgvru1ineshh" path="res://scenes/enviroment/rain_particles.tscn" id="6_x4axt"]
+[ext_resource type="Script" path="res://scripts/audio/audio_sfx.gd" id="6_x7jak"]
+[ext_resource type="PackedScene" uid="uid://c8g21i1bsrasq" path="res://scenes/interface/pause_menu.tscn" id="7_8ljld"]
+[ext_resource type="PackedScene" uid="uid://c1qx51rddc4h4" path="res://scenes/interface/tutorial_node.tscn" id="8_hdtml"]
+
+[node name="Level" type="Node2D" node_paths=PackedStringArray("hud", "music_node")]
+position = Vector2(2, 0)
+script = ExtResource("1_kbtaa")
+hud = NodePath("Hud")
+music_node = NodePath("MusicNode")
+scene_path = "res://scenes/level/level.tscn"
+pause_menu_path = ExtResource("7_8ljld")
+
+[node name="TileMap" parent="." instance=ExtResource("2_fgxam")]
+metadata/_edit_vertical_guides_ = [5043.0, -5008.0]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.419608, 0.419608, 0.419608, 1)
+
+[node name="TutorialNode" parent="." instance=ExtResource("8_hdtml")]
+
+[node name="Hud" parent="." instance=ExtResource("4_m3tqh")]
+
+[node name="RainParticles" parent="." instance=ExtResource("6_x4axt")]
+
+[node name="MusicNode" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_lwla4")
+autoplay = true
+bus = &"Music"
+script = ExtResource("6_x7jak")
+
+[connection signal="escape_pressed" from="." to="." method="on_escape_pressed"]
+[connection signal="finished" from="MusicNode" to="." method="on_music_finished"]

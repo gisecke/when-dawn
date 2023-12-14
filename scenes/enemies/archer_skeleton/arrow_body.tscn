@@ -1,0 +1,96 @@
+[gd_scene load_steps=6 format=3 uid="uid://gpw67l5l454m"]
+
+[ext_resource type="Script" path="res://scripts/characters/enemies/arcker_skeleton/arrow_body.gd" id="1_6f1fc"]
+[ext_resource type="Texture2D" uid="uid://baso04ptooeqq" path="res://assets/characters/enemies/skeleton/arrow_sprite.png" id="2_nwmum"]
+
+[sub_resource type="Animation" id="Animation_psh0s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_pypsn"]
+resource_name = "kill"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [false],
+"method": &"set_physics_process"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_moqjn"]
+_data = {
+"RESET": SubResource("Animation_psh0s"),
+"kill": SubResource("Animation_pypsn")
+}
+
+[node name="ArrowBody" type="RigidBody2D" node_paths=PackedStringArray("texture_sprite", "collision_shape", "to_hit_collision", "animation", "life_timer_arrow")]
+collision_layer = 4
+collision_mask = 3
+collision_priority = 2.0
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("1_6f1fc")
+texture_sprite = NodePath("Texture")
+collision_shape = NodePath("Collision")
+to_hit_collision = NodePath("ToHitArea/ToHitCollision")
+animation = NodePath("Animation")
+life_timer_arrow = NodePath("LifeTimerArrow")
+force = 120
+base_attack = 2
+
+[node name="Texture" type="Sprite2D" parent="."]
+texture = ExtResource("2_nwmum")
+hframes = 3
+frame = 1
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+
+[node name="ToHitArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 3
+
+[node name="ToHitCollision" type="CollisionShape2D" parent="ToHitArea"]
+position = Vector2(5, -0.5)
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_moqjn")
+}
+
+[node name="LifeTimerArrow" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="body_entered" from="ToHitArea" to="." method="on_to_hit_area_body_entered"]
+[connection signal="animation_finished" from="Animation" to="." method="on_animation_finished"]
+[connection signal="timeout" from="LifeTimerArrow" to="." method="on_life_timer_arrow_timeout"]

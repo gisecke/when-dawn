@@ -1,0 +1,649 @@
+[gd_scene load_steps=81 format=3 uid="uid://cv74a4nnl5anw"]
+
+[ext_resource type="Script" path="res://scripts/interface/initial_screen.gd" id="1_2ehp5"]
+[ext_resource type="Texture2D" uid="uid://bu7omwisykupg" path="res://assets/interface/menu-background.png" id="1_acnwr"]
+[ext_resource type="Texture2D" uid="uid://dpakmisj62dft" path="res://assets/interface/buttons/new-game-normal.png" id="2_72wcg"]
+[ext_resource type="Texture2D" uid="uid://csclmaqyp5vxf" path="res://assets/interface/menu-background-title.png" id="3_3p5xc"]
+[ext_resource type="Texture2D" uid="uid://bot4n423pnjqi" path="res://assets/interface/buttons/new-game-pressed.png" id="3_kbpup"]
+[ext_resource type="Texture2D" uid="uid://sijv0fvrpua" path="res://assets/interface/buttons/new-game-hover.png" id="5_otds7"]
+[ext_resource type="Texture2D" uid="uid://bdujyssmbgdgy" path="res://assets/interface/buttons/option-normal.png" id="5_v16sr"]
+[ext_resource type="Texture2D" uid="uid://e47cidcdcar2" path="res://assets/interface/buttons/option-pressed.png" id="6_bwbsw"]
+[ext_resource type="Texture2D" uid="uid://cvick2pahc5yg" path="res://assets/interface/buttons/option-hover.png" id="8_gg85w"]
+[ext_resource type="Texture2D" uid="uid://dg1gv25o8tbmb" path="res://assets/interface/buttons/quit-normal.png" id="8_s1py0"]
+[ext_resource type="Texture2D" uid="uid://b6c5b6kj2yrf" path="res://assets/interface/buttons/quit-pressed.png" id="9_5gplv"]
+[ext_resource type="Texture2D" uid="uid://o3yhrn631637" path="res://assets/interface/buttons/quit-hover.png" id="11_iaial"]
+[ext_resource type="Shader" path="res://shaders/initial_screen.gdshader" id="12_7ykej"]
+[ext_resource type="FontFile" uid="uid://ck3faun43yoik" path="res://assets/fonts/Halloween pixel.otf" id="13_n4u5o"]
+[ext_resource type="Texture2D" uid="uid://d2cpda5u8xqdc" path="res://assets/interface/buttons/menu/options-title.png" id="13_pbvrf"]
+[ext_resource type="Texture2D" uid="uid://bg4spebc0nwls" path="res://assets/interface/buttons/menu/grabber.png" id="15_mmjpm"]
+[ext_resource type="Texture2D" uid="uid://dw17p6gjuyh2x" path="res://assets/interface/buttons/menu/grabber-highlight.png" id="16_v33h4"]
+[ext_resource type="Script" path="res://scripts/interface/menu/AudioSlider.gd" id="17_0hm3y"]
+[ext_resource type="Texture2D" uid="uid://cy61xvcky08sn" path="res://assets/interface/buttons/save-normal.png" id="18_jfvn3"]
+[ext_resource type="Script" path="res://scripts/audio/audio_sfx.gd" id="18_lnsli"]
+[ext_resource type="Texture2D" uid="uid://5wxc782w3t1h" path="res://assets/interface/buttons/save-pressed.png" id="19_bfq3h"]
+[ext_resource type="AudioStream" uid="uid://cs5anakn1yd5k" path="res://assets/sounds/music/Intro.ogg" id="19_e8e5s"]
+[ext_resource type="Texture2D" uid="uid://g5gkn6cvpes4" path="res://assets/interface/buttons/save-hover.png" id="20_kxt0d"]
+[ext_resource type="Texture2D" uid="uid://bedpjfjsc4e3b" path="res://assets/interface/buttons/back-normal.png" id="21_w4ej2"]
+[ext_resource type="Texture2D" uid="uid://dpa6veryhyi2c" path="res://assets/interface/buttons/back-pressed.png" id="22_ny36m"]
+[ext_resource type="Texture2D" uid="uid://dq8vgmdlxkvh6" path="res://assets/interface/buttons/back-hover.png" id="23_qu148"]
+[ext_resource type="Texture2D" uid="uid://uuwmspcuv5a2" path="res://assets/interface/buttons/menu/hero-container.png" id="24_p86ri"]
+[ext_resource type="Texture2D" uid="uid://drm8vjq71lqnh" path="res://assets/interface/buttons/menu/players/barbarian/barbarian2.png" id="25_pnqaw"]
+[ext_resource type="Texture2D" uid="uid://bsg2nnhq4id5w" path="res://assets/interface/buttons/menu/players/barbarian/barbarian3.png" id="26_v715c"]
+[ext_resource type="Texture2D" uid="uid://yp4lwkr6twxn" path="res://assets/interface/buttons/menu/players/barbarian/barbarian12.png" id="27_7pa50"]
+[ext_resource type="Texture2D" uid="uid://dvesp6nude2jv" path="res://assets/interface/buttons/menu/players/barbarian/barbarian4.png" id="28_g1dnb"]
+[ext_resource type="Texture2D" uid="uid://llug203q4y5k" path="res://assets/interface/buttons/menu/players/barbarian/barbarian5.png" id="29_3hjjg"]
+[ext_resource type="Texture2D" uid="uid://bxe1s83uiakep" path="res://assets/interface/buttons/menu/players/barbarian/barbarian6.png" id="30_f1h1b"]
+[ext_resource type="Texture2D" uid="uid://b7xq7xppnaysr" path="res://assets/interface/buttons/menu/players/barbarian/barbarian7.png" id="31_t2et0"]
+[ext_resource type="Texture2D" uid="uid://c4echkw21o32t" path="res://assets/interface/buttons/menu/players/barbarian/barbarian8.png" id="32_fwns4"]
+[ext_resource type="Texture2D" uid="uid://br2uu8v5qynj8" path="res://assets/interface/buttons/menu/players/barbarian/barbarian9.png" id="33_j8esm"]
+[ext_resource type="Texture2D" uid="uid://efof2purhf10" path="res://assets/interface/buttons/menu/players/barbarian/barbarian10.png" id="34_qwytk"]
+[ext_resource type="Texture2D" uid="uid://lhcimqv5qnig" path="res://assets/interface/buttons/menu/players/barbarian/barbarian11.png" id="35_r60sv"]
+[ext_resource type="Texture2D" uid="uid://4htcn6f47mt0" path="res://assets/interface/buttons/menu/players/barbarian/barbarian13.png" id="36_abmg7"]
+[ext_resource type="Texture2D" uid="uid://csf6kupogcrl7" path="res://assets/interface/buttons/menu/players/barbarian/barbarian14.png" id="37_x7c54"]
+[ext_resource type="Texture2D" uid="uid://b8rmqaybugkwc" path="res://assets/interface/buttons/menu/players/barbarian/barbarian15.png" id="38_g7sxs"]
+[ext_resource type="Texture2D" uid="uid://bufyqfc5v1os7" path="res://assets/interface/buttons/menu/players/barbarian/barbarian16.png" id="39_1fywc"]
+[ext_resource type="Texture2D" uid="uid://c52dla7uilndc" path="res://assets/interface/buttons/menu/players/barbarian/barbarian17.png" id="40_m1id1"]
+[ext_resource type="Texture2D" uid="uid://dy1666ns47ldq" path="res://assets/interface/buttons/menu/players/barbarian/barbarian18.png" id="41_xd6ed"]
+[ext_resource type="Texture2D" uid="uid://dmignqxb836kx" path="res://assets/interface/buttons/menu/players/knight/knight2.png" id="42_b4fdk"]
+[ext_resource type="Texture2D" uid="uid://xfx5qbr34cmm" path="res://assets/interface/buttons/menu/players/knight/knight3.png" id="43_28vr2"]
+[ext_resource type="Texture2D" uid="uid://cxeojo5hu4pr8" path="res://assets/interface/buttons/menu/players/knight/knight4.png" id="44_qcb5e"]
+[ext_resource type="Texture2D" uid="uid://c4lpkndkfyya0" path="res://assets/interface/buttons/menu/players/knight/knight5.png" id="45_a64pc"]
+[ext_resource type="Texture2D" uid="uid://bqxf2pqfaal5k" path="res://assets/interface/buttons/menu/players/knight/knight6.png" id="46_2qopx"]
+[ext_resource type="Texture2D" uid="uid://d3yyhy7np2osn" path="res://assets/interface/buttons/menu/players/knight/knight7.png" id="47_o6sqd"]
+[ext_resource type="Texture2D" uid="uid://51blh4qinc7u" path="res://assets/interface/buttons/menu/players/knight/knight8.png" id="48_6vhg7"]
+[ext_resource type="Texture2D" uid="uid://ds8nda4aapjas" path="res://assets/interface/buttons/menu/players/knight/knight9.png" id="49_cu6ei"]
+[ext_resource type="Texture2D" uid="uid://cdbqi6327nxi6" path="res://assets/interface/buttons/menu/players/knight/knight10.png" id="50_wdts3"]
+[ext_resource type="Texture2D" uid="uid://c03dtlxrqi80w" path="res://assets/interface/buttons/menu/players/knight/knight11.png" id="51_5djhu"]
+[ext_resource type="Texture2D" uid="uid://c7sip5omoobu" path="res://assets/interface/buttons/menu/players/knight/knight12.png" id="52_4wv22"]
+[ext_resource type="Texture2D" uid="uid://qi28q4m1lv5c" path="res://assets/interface/buttons/menu/players/knight/knight13.png" id="53_yc4e0"]
+[ext_resource type="Texture2D" uid="uid://b3ejnxgo4ldhk" path="res://assets/interface/buttons/menu/players/knight/knight14.png" id="54_iv77j"]
+[ext_resource type="Texture2D" uid="uid://c5jxvp87puado" path="res://assets/interface/buttons/menu/players/wizard/wizard2.png" id="55_c28ty"]
+[ext_resource type="Texture2D" uid="uid://d2d321mrl836a" path="res://assets/interface/buttons/menu/players/wizard/wizard3.png" id="56_u4trp"]
+[ext_resource type="Texture2D" uid="uid://c81fi8n3sd4yx" path="res://assets/interface/buttons/menu/players/wizard/wizard4.png" id="57_nvxi5"]
+[ext_resource type="Texture2D" uid="uid://6smleed57l6n" path="res://assets/interface/buttons/menu/players/wizard/wizard5.png" id="58_p7p0q"]
+[ext_resource type="Texture2D" uid="uid://c1lqb0pgf5tdd" path="res://assets/interface/buttons/menu/players/wizard/wizard6.png" id="59_e8iju"]
+[ext_resource type="Texture2D" uid="uid://t51tw4ygeh1u" path="res://assets/interface/buttons/menu/players/wizard/wizard7.png" id="60_jj2eh"]
+[ext_resource type="Texture2D" uid="uid://b1e2e8giyjaof" path="res://assets/interface/buttons/menu/players/wizard/wizard8.png" id="61_pggyp"]
+[ext_resource type="Texture2D" uid="uid://c4vtn781hmpnt" path="res://assets/interface/buttons/menu/players/wizard/wizard9.png" id="62_qedj8"]
+[ext_resource type="Texture2D" uid="uid://cjn4fdw2ahld5" path="res://assets/interface/buttons/menu/players/wizard/wizard10.png" id="63_vgj82"]
+[ext_resource type="Texture2D" uid="uid://c4napn26cv487" path="res://assets/interface/buttons/menu/players/wizard/wizard11.png" id="64_5c68g"]
+[ext_resource type="Texture2D" uid="uid://bdd1fkyc2hx83" path="res://assets/interface/buttons/menu/players/wizard/wizard12.png" id="65_pmxlp"]
+[ext_resource type="Texture2D" uid="uid://c32y7xu0xryww" path="res://assets/interface/buttons/menu/players/wizard/wizard13.png" id="66_jve16"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_jm01a"]
+frames = 11
+frame_0/texture = ExtResource("25_pnqaw")
+frame_0/duration = 0.1
+frame_1/texture = ExtResource("26_v715c")
+frame_1/duration = 0.1
+frame_2/texture = ExtResource("28_g1dnb")
+frame_2/duration = 0.1
+frame_3/texture = ExtResource("29_3hjjg")
+frame_3/duration = 0.1
+frame_4/texture = ExtResource("30_f1h1b")
+frame_4/duration = 0.1
+frame_5/texture = ExtResource("31_t2et0")
+frame_5/duration = 0.1
+frame_6/texture = ExtResource("32_fwns4")
+frame_6/duration = 0.1
+frame_7/texture = ExtResource("33_j8esm")
+frame_7/duration = 0.1
+frame_8/texture = ExtResource("34_qwytk")
+frame_8/duration = 0.1
+frame_9/texture = ExtResource("35_r60sv")
+frame_9/duration = 0.1
+frame_10/texture = ExtResource("27_7pa50")
+frame_10/duration = 0.1
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_jhbe8"]
+frames = 6
+frame_0/texture = ExtResource("36_abmg7")
+frame_0/duration = 0.1
+frame_1/texture = ExtResource("37_x7c54")
+frame_1/duration = 0.1
+frame_2/texture = ExtResource("38_g7sxs")
+frame_2/duration = 0.1
+frame_3/texture = ExtResource("39_1fywc")
+frame_3/duration = 0.1
+frame_4/texture = ExtResource("40_m1id1")
+frame_4/duration = 0.1
+frame_5/texture = ExtResource("41_xd6ed")
+frame_5/duration = 0.1
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_52jk2"]
+frames = 7
+frame_0/texture = ExtResource("42_b4fdk")
+frame_0/duration = 0.1
+frame_1/texture = ExtResource("43_28vr2")
+frame_1/duration = 0.1
+frame_2/texture = ExtResource("44_qcb5e")
+frame_2/duration = 0.1
+frame_3/texture = ExtResource("45_a64pc")
+frame_3/duration = 0.1
+frame_4/texture = ExtResource("46_2qopx")
+frame_4/duration = 0.1
+frame_5/texture = ExtResource("47_o6sqd")
+frame_5/duration = 0.1
+frame_6/texture = ExtResource("48_6vhg7")
+frame_6/duration = 0.1
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_woo4e"]
+frames = 6
+frame_0/texture = ExtResource("49_cu6ei")
+frame_0/duration = 0.1
+frame_1/texture = ExtResource("50_wdts3")
+frame_1/duration = 0.1
+frame_2/texture = ExtResource("51_5djhu")
+frame_2/duration = 0.1
+frame_3/texture = ExtResource("52_4wv22")
+frame_3/duration = 0.1
+frame_4/texture = ExtResource("53_yc4e0")
+frame_4/duration = 0.1
+frame_5/texture = ExtResource("54_iv77j")
+frame_5/duration = 0.1
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_skt67"]
+frames = 6
+frame_0/texture = ExtResource("55_c28ty")
+frame_0/duration = 0.1
+frame_1/texture = ExtResource("56_u4trp")
+frame_1/duration = 0.1
+frame_2/texture = ExtResource("57_nvxi5")
+frame_2/duration = 0.1
+frame_3/texture = ExtResource("58_p7p0q")
+frame_3/duration = 0.1
+frame_4/texture = ExtResource("59_e8iju")
+frame_4/duration = 0.1
+frame_5/texture = ExtResource("60_jj2eh")
+frame_5/duration = 0.1
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_msbwl"]
+frames = 6
+frame_0/texture = ExtResource("61_pggyp")
+frame_0/duration = 0.1
+frame_1/texture = ExtResource("62_qedj8")
+frame_1/duration = 0.1
+frame_2/texture = ExtResource("63_vgj82")
+frame_2/duration = 0.1
+frame_3/texture = ExtResource("64_5c68g")
+frame_3/duration = 0.1
+frame_4/texture = ExtResource("65_pmxlp")
+frame_4/duration = 0.1
+frame_5/texture = ExtResource("66_jve16")
+frame_5/duration = 0.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_blaev"]
+shader = ExtResource("12_7ykej")
+shader_parameter/visible_rows = 0
+shader_parameter/offset = 0.0
+
+[sub_resource type="Animation" id="Animation_w8pfk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ColorRect2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 120)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../ColorRect2:size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(426, 120)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(426, 120)]
+}
+
+[sub_resource type="Animation" id="Animation_lm1dv"]
+resource_name = "fade_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -120), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../ColorRect2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 240), Vector2(0, 120)]
+}
+
+[sub_resource type="Animation" id="Animation_rpv3e"]
+resource_name = "fade_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ColorRect2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 120), Vector2(0, 240)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -120)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../ColorRect2:size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(426, 120)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(426, 120)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_osrbf"]
+_data = {
+"RESET": SubResource("Animation_w8pfk"),
+"fade_in": SubResource("Animation_lm1dv"),
+"fade_out": SubResource("Animation_rpv3e")
+}
+
+[node name="InitialScreen" type="Control" node_paths=PackedStringArray("animation", "start_screen", "audio_sfx", "audio_music", "option_box", "select_player_container") groups=["initial_screen"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_2ehp5")
+animation = NodePath("Animation")
+start_screen = NodePath("StartScreen")
+audio_sfx = NodePath("AudioSfx")
+audio_music = NodePath("AudioMusic")
+option_box = NodePath("OptionBoxContainer")
+select_player_container = NodePath("SelectPlayerContainer")
+
+[node name="BackgroundTexture" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_acnwr")
+
+[node name="StartScreen" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TitleTexture" type="TextureRect" parent="StartScreen"]
+layout_mode = 0
+offset_right = 426.0
+offset_bottom = 240.0
+texture = ExtResource("3_3p5xc")
+
+[node name="InitialHBoxContainer" type="HBoxContainer" parent="StartScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 81.0
+offset_top = 160.0
+offset_right = 305.0
+offset_bottom = 183.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="StartButton" type="TextureButton" parent="StartScreen/InitialHBoxContainer" groups=["button"]]
+layout_mode = 2
+texture_normal = ExtResource("2_72wcg")
+texture_pressed = ExtResource("3_kbpup")
+texture_hover = ExtResource("5_otds7")
+
+[node name="OptionButton" type="TextureButton" parent="StartScreen/InitialHBoxContainer" groups=["button"]]
+layout_mode = 2
+texture_normal = ExtResource("5_v16sr")
+texture_pressed = ExtResource("6_bwbsw")
+texture_hover = ExtResource("8_gg85w")
+
+[node name="QuitButton" type="TextureButton" parent="StartScreen/InitialHBoxContainer" groups=["button"]]
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("8_s1py0")
+texture_pressed = ExtResource("9_5gplv")
+texture_hover = ExtResource("11_iaial")
+
+[node name="OptionBoxContainer" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -69.0
+offset_right = 96.0
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleTexture" type="TextureRect" parent="OptionBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("13_pbvrf")
+stretch_mode = 2
+
+[node name="Separator" type="AspectRatioContainer" parent="OptionBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="HBox1" type="HBoxContainer" parent="OptionBoxContainer"]
+layout_mode = 2
+
+[node name="MasterLabel" type="Label" parent="OptionBoxContainer/HBox1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.258824, 0.141176, 0.2, 1)
+theme_override_fonts/font = ExtResource("13_n4u5o")
+theme_override_font_sizes/font_size = 22
+text = "Master"
+
+[node name="MasterSlider" type="HSlider" parent="OptionBoxContainer/HBox1" groups=["slider"]]
+layout_direction = 1
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_icons/grabber = ExtResource("15_mmjpm")
+theme_override_icons/grabber_highlight = ExtResource("16_v33h4")
+max_value = 1.0
+step = 0.1
+value = 1.0
+script = ExtResource("17_0hm3y")
+bus_name = "Master"
+
+[node name="HBox2" type="HBoxContainer" parent="OptionBoxContainer"]
+layout_mode = 2
+
+[node name="MusicLabel" type="Label" parent="OptionBoxContainer/HBox2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.257813, 0.140625, 0.199219, 1)
+theme_override_fonts/font = ExtResource("13_n4u5o")
+theme_override_font_sizes/font_size = 22
+text = "Music"
+
+[node name="AspectRatioContainer2" type="AspectRatioContainer" parent="OptionBoxContainer/HBox2"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+
+[node name="MusicSlider" type="HSlider" parent="OptionBoxContainer/HBox2" groups=["slider"]]
+layout_direction = 1
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_icons/grabber = ExtResource("15_mmjpm")
+theme_override_icons/grabber_highlight = ExtResource("16_v33h4")
+max_value = 1.0
+step = 0.1
+value = 1.0
+script = ExtResource("17_0hm3y")
+bus_name = "Music"
+
+[node name="HBox3" type="HBoxContainer" parent="OptionBoxContainer"]
+layout_mode = 2
+
+[node name="SfxLabel" type="Label" parent="OptionBoxContainer/HBox3"]
+layout_mode = 2
+size_flags_stretch_ratio = 1.5
+theme_override_colors/font_color = Color(0.257813, 0.140625, 0.199219, 1)
+theme_override_fonts/font = ExtResource("13_n4u5o")
+theme_override_font_sizes/font_size = 22
+text = "Sfx"
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="OptionBoxContainer/HBox3"]
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+
+[node name="SfxSlider" type="HSlider" parent="OptionBoxContainer/HBox3" groups=["slider"]]
+custom_minimum_size = Vector2(53, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_icons/grabber = ExtResource("15_mmjpm")
+theme_override_icons/grabber_highlight = ExtResource("16_v33h4")
+max_value = 1.0
+step = 0.1
+value = 1.0
+script = ExtResource("17_0hm3y")
+bus_name = "Sfx"
+
+[node name="HBox4" type="HBoxContainer" parent="OptionBoxContainer"]
+layout_mode = 2
+
+[node name="SaveButton" type="TextureButton" parent="OptionBoxContainer/HBox4" groups=["button"]]
+layout_mode = 2
+texture_normal = ExtResource("18_jfvn3")
+texture_pressed = ExtResource("19_bfq3h")
+texture_hover = ExtResource("20_kxt0d")
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="OptionBoxContainer/HBox4"]
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+
+[node name="BackButton" type="TextureButton" parent="OptionBoxContainer/HBox4" groups=["button"]]
+layout_mode = 2
+texture_normal = ExtResource("21_w4ej2")
+texture_pressed = ExtResource("22_ny36m")
+texture_hover = ExtResource("23_qu148")
+
+[node name="SelectPlayerContainer" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -141.5
+offset_top = -52.5
+offset_right = 141.5
+offset_bottom = 92.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HorizontalPlayerContainer" type="HBoxContainer" parent="SelectPlayerContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="Player1Container" type="VBoxContainer" parent="SelectPlayerContainer/HorizontalPlayerContainer"]
+layout_mode = 2
+
+[node name="TexturePlayerContainer" type="CenterContainer" parent="SelectPlayerContainer/HorizontalPlayerContainer/Player1Container"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="SelectPlayerContainer/HorizontalPlayerContainer/Player1Container/TexturePlayerContainer"]
+layout_mode = 2
+texture = ExtResource("24_p86ri")
+
+[node name="Barbarian" type="TextureButton" parent="SelectPlayerContainer/HorizontalPlayerContainer/Player1Container/TexturePlayerContainer" groups=["button"]]
+layout_mode = 2
+texture_normal = SubResource("AnimatedTexture_jm01a")
+texture_hover = SubResource("AnimatedTexture_jhbe8")
+
+[node name="PlayerName1" type="Label" parent="SelectPlayerContainer/HorizontalPlayerContainer/Player1Container"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.258824, 0.141176, 0.2, 1)
+theme_override_fonts/font = ExtResource("13_n4u5o")
+text = "Barbarian"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="SelectPlayerContainer/HorizontalPlayerContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="Player2Container" type="VBoxContainer" parent="SelectPlayerContainer/HorizontalPlayerContainer"]
+layout_mode = 2
+
+[node name="TexturePlayerContainer" type="CenterContainer" parent="SelectPlayerContainer/HorizontalPlayerContainer/Player2Container"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="SelectPlayerContainer/HorizontalPlayerContainer/Player2Container/TexturePlayerContainer"]
+layout_mode = 2
+texture = ExtResource("24_p86ri")
+
+[node name="Knight" type="TextureButton" parent="SelectPlayerContainer/HorizontalPlayerContainer/Player2Container/TexturePlayerContainer" groups=["button"]]
+layout_mode = 2
+texture_normal = SubResource("AnimatedTexture_52jk2")
+texture_hover = SubResource("AnimatedTexture_woo4e")
+
+[node name="PlayerName2" type="Label" parent="SelectPlayerContainer/HorizontalPlayerContainer/Player2Container"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.258824, 0.141176, 0.2, 1)
+theme_override_fonts/font = ExtResource("13_n4u5o")
+text = "Knight"
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="SelectPlayerContainer/HorizontalPlayerContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="Player2Container3" type="VBoxContainer" parent="SelectPlayerContainer/HorizontalPlayerContainer"]
+layout_mode = 2
+
+[node name="TexturePlayerContainer" type="CenterContainer" parent="SelectPlayerContainer/HorizontalPlayerContainer/Player2Container3"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="SelectPlayerContainer/HorizontalPlayerContainer/Player2Container3/TexturePlayerContainer"]
+layout_mode = 2
+texture = ExtResource("24_p86ri")
+
+[node name="Wizard" type="TextureButton" parent="SelectPlayerContainer/HorizontalPlayerContainer/Player2Container3/TexturePlayerContainer" groups=["button"]]
+layout_mode = 2
+texture_normal = SubResource("AnimatedTexture_skt67")
+texture_hover = SubResource("AnimatedTexture_msbwl")
+
+[node name="PlayerName3" type="Label" parent="SelectPlayerContainer/HorizontalPlayerContainer/Player2Container3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.258824, 0.141176, 0.2, 1)
+theme_override_fonts/font = ExtResource("13_n4u5o")
+text = "Wizard"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="SelectPlayerContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="BackButton" type="TextureButton" parent="SelectPlayerContainer" groups=["button"]]
+layout_mode = 2
+size_flags_horizontal = 8
+texture_normal = ExtResource("21_w4ej2")
+texture_pressed = ExtResource("22_ny36m")
+texture_hover = ExtResource("23_qu148")
+
+[node name="ColorRect1" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_blaev")
+layout_mode = 2
+offset_right = 426.0
+offset_bottom = 120.0
+color = Color(1, 1, 1, 0)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_blaev")
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = 120.0
+offset_right = 426.0
+offset_bottom = 240.0
+grow_vertical = 0
+color = Color(1, 1, 1, 0)
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../ColorRect1")
+autoplay = "fade_out"
+libraries = {
+"": SubResource("AnimationLibrary_osrbf")
+}
+
+[node name="AudioMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19_e8e5s")
+volume_db = -10.0
+autoplay = true
+bus = &"Music"
+script = ExtResource("18_lnsli")
+
+[node name="AudioSfx" type="AudioStreamPlayer" parent="."]
+bus = &"Sfx"
+script = ExtResource("18_lnsli")
+
+[connection signal="value_changed" from="OptionBoxContainer/HBox1/MasterSlider" to="OptionBoxContainer/HBox1/MasterSlider" method="_on_value_changed"]
+[connection signal="value_changed" from="OptionBoxContainer/HBox2/MusicSlider" to="OptionBoxContainer/HBox2/MusicSlider" method="_on_value_changed"]
+[connection signal="value_changed" from="OptionBoxContainer/HBox3/SfxSlider" to="OptionBoxContainer/HBox3/SfxSlider" method="_on_value_changed"]
+[connection signal="animation_finished" from="Animation" to="." method="on_animation_finished"]

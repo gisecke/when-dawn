@@ -1,0 +1,121 @@
+[gd_scene load_steps=11 format=3 uid="uid://d1d435fqsjpx6"]
+
+[ext_resource type="Script" path="res://scripts/characters/heros/player_template/player_template.gd" id="1_vfb5k"]
+[ext_resource type="PackedScene" uid="uid://bnwelkt0285m2" path="res://scenes/interface/health_bar.tscn" id="1_yln15"]
+[ext_resource type="Script" path="res://scripts/characters/heros/player_template/texture_template.gd" id="2_80hpf"]
+[ext_resource type="Script" path="res://scripts/characters/heros/player_template/camera_script.gd" id="3_nal0y"]
+[ext_resource type="Script" path="res://scripts/characters/heros/player_template/stats_template.gd" id="3_xtffv"]
+[ext_resource type="PackedScene" uid="uid://d1mlpkbx5pcbs" path="res://scenes/interface/bonus_time_bar.tscn" id="6_nehev"]
+[ext_resource type="PackedScene" uid="uid://fhue7g27dnmn" path="res://scenes/interface/audio_sfx.tscn" id="7_87yrx"]
+
+[sub_resource type="Animation" id="Animation_yqlav"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_wgwjr"]
+resource_name = "invencibility"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s6r7g"]
+_data = {
+"RESET": SubResource("Animation_yqlav"),
+"invencibility": SubResource("Animation_wgwjr")
+}
+
+[node name="PlayerTemplate" type="CharacterBody2D" node_paths=PackedStringArray("walking_audio_sfx", "action_audio_sfx")]
+collision_mask = 34
+script = ExtResource("1_vfb5k")
+walking_audio_sfx = NodePath("AudioNodes/WalkingAudioSfx")
+action_audio_sfx = NodePath("AudioNodes/ActionkAudioSfx")
+
+[node name="Texture" type="Sprite2D" parent="." node_paths=PackedStringArray("player", "animation", "animation_invencibility", "attack_area_collision", "damage_area_collision", "stats") groups=["animation"]]
+script = ExtResource("2_80hpf")
+player = NodePath("..")
+animation = NodePath("../Animation")
+animation_invencibility = NodePath("../AnimationInvencibility")
+attack_area_collision = NodePath("../AttackArea/CollisionAttackArea")
+damage_area_collision = NodePath("../DamageArea/CollisionDamageArea")
+stats = NodePath("../Stats")
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+
+[node name="DamageArea" type="Area2D" parent="."]
+collision_mask = 4
+
+[node name="CollisionDamageArea" type="CollisionShape2D" parent="DamageArea"]
+
+[node name="AttackArea" type="Area2D" parent="."]
+collision_mask = 4
+
+[node name="CollisionAttackArea" type="CollisionShape2D" parent="AttackArea"]
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+
+[node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("timer")]
+script = ExtResource("3_nal0y")
+timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="Camera"]
+one_shot = true
+
+[node name="Light" type="PointLight2D" parent="."]
+energy = 0.5
+
+[node name="Stats" type="Node2D" parent="." node_paths=PackedStringArray("timer_bonus", "player", "animation_player", "health_bar", "bonus_timer_bar") groups=["stats"]]
+script = ExtResource("3_xtffv")
+timer_bonus = NodePath("TimerBonus")
+player = NodePath("..")
+animation_player = NodePath("../Animation")
+health_bar = NodePath("../HealthBar")
+bonus_timer_bar = NodePath("../BonusTimeBar")
+
+[node name="TimerBonus" type="Timer" parent="Stats"]
+wait_time = 30.0
+one_shot = true
+
+[node name="HealthBar" parent="." instance=ExtResource("1_yln15")]
+
+[node name="BonusTimeBar" parent="." instance=ExtResource("6_nehev")]
+
+[node name="AnimationInvencibility" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_s6r7g")
+}
+
+[node name="AudioNodes" type="Node2D" parent="."]
+
+[node name="WalkingAudioSfx" parent="AudioNodes" instance=ExtResource("7_87yrx")]
+volume_db = -5.0
+bus = &"Sfx"
+
+[node name="ActionkAudioSfx" parent="AudioNodes" instance=ExtResource("7_87yrx")]
+bus = &"Sfx"
+
+[connection signal="animation_finished" from="Animation" to="Texture" method="on_animation_finished"]
+[connection signal="area_entered" from="DamageArea" to="." method="_on_damage_area_entered"]
+[connection signal="timeout" from="Camera/Timer" to="Camera" method="on_timer_timeout"]
+[connection signal="timeout" from="Stats/TimerBonus" to="Stats" method="on_timer_bonus_timeout"]
+[connection signal="animation_finished" from="AnimationInvencibility" to="Texture" method="on_animation_invencibility_finished"]

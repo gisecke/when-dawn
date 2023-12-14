@@ -1,0 +1,96 @@
+[gd_scene load_steps=8 format=3 uid="uid://b88ltkyu5l5kb"]
+
+[ext_resource type="Script" path="res://scripts/characters/heros/wizard/spawn_lightning.gd" id="1_adrlb"]
+[ext_resource type="Texture2D" uid="uid://cxwk57ncgh7ch" path="res://assets/characters/heros/lightning.png" id="1_h63de"]
+[ext_resource type="PackedScene" uid="uid://d2lpy4omfjvq7" path="res://scenes/heros/spell/stats.tscn" id="2_3f0fe"]
+
+[sub_resource type="Animation" id="Animation_r8aqi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AreaAttack/Collision:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_lbum1"]
+resource_name = "lightning"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AreaAttack/Collision:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c74kl"]
+_data = {
+"RESET": SubResource("Animation_r8aqi"),
+"lightning": SubResource("Animation_lbum1")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_37f3r"]
+size = Vector2(16, 107)
+
+[node name="SpawnLightning" type="Marker2D"]
+script = ExtResource("1_adrlb")
+
+[node name="Texture" type="Sprite2D" parent="."]
+texture = ExtResource("1_h63de")
+offset = Vector2(0, -120)
+hframes = 9
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+autoplay = "lightning"
+libraries = {
+"": SubResource("AnimationLibrary_c74kl")
+}
+
+[node name="AreaAttack" type="Area2D" parent="."]
+collision_mask = 4
+
+[node name="Collision" type="CollisionShape2D" parent="AreaAttack"]
+position = Vector2(0, -51.5)
+shape = SubResource("RectangleShape2D_37f3r")
+disabled = true
+
+[node name="Stats" parent="." instance=ExtResource("2_3f0fe")]
+base_attack = 4
+
+[connection signal="animation_finished" from="Animation" to="." method="on_animation_finished"]

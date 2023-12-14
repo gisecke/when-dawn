@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnwelkt0285m2"]
+
+[ext_resource type="Texture2D" uid="uid://bgd2ajnsmmwbp" path="res://assets/interface/healthbar.png" id="1_ad0t4"]
+[ext_resource type="Script" path="res://scripts/interface/health_bar.gd" id="1_teed3"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ufbsg"]
+
+[node name="HealthBar" type="Node2D" node_paths=PackedStringArray("health_texture", "health_progress")]
+script = ExtResource("1_teed3")
+health_texture = NodePath("HealthTexture")
+health_progress = NodePath("HealthTexture/HealthProgressBar")
+
+[node name="HealthBackground" type="TextureRect" parent="."]
+modulate = Color(0.12549, 0.12549, 0.12549, 1)
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -13.0
+offset_top = -1.0
+offset_right = 13.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ad0t4")
+
+[node name="HealthTexture" type="TextureRect" parent="."]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HealthProgressBar" type="TextureProgressBar" parent="HealthTexture"]
+material = SubResource("CanvasItemMaterial_ufbsg")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 15.0
+texture_progress = ExtResource("1_ad0t4")

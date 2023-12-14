@@ -1,0 +1,153 @@
+[gd_scene load_steps=18 format=3 uid="uid://u404sfawx3k4"]
+
+[ext_resource type="Texture2D" uid="uid://bevftj10md3hi" path="res://assets/tileset/fire.png" id="1_x654e"]
+[ext_resource type="Texture2D" uid="uid://b3b6k7gq3ybkn" path="res://assets/tileset/light.png" id="2_0vtdm"]
+
+[sub_resource type="Gradient" id="Gradient_dhrga"]
+colors = PackedColorArray(0.820313, 0.144531, 0.191406, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_y0ya2"]
+gradient = SubResource("Gradient_dhrga")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eeadp"]
+emission_shape = 3
+emission_box_extents = Vector3(6, 6, 1)
+particle_flag_disable_z = true
+direction = Vector3(5, 0, 0)
+spread = 0.45
+gravity = Vector3(0, -10, 0)
+angular_velocity_min = 113.33
+angular_velocity_max = 213.33
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+color = Color(0.964706, 0.964706, 0.964706, 1)
+color_ramp = SubResource("GradientTexture1D_y0ya2")
+turbulence_enabled = true
+turbulence_noise_strength = 12.12
+
+[sub_resource type="Animation" id="Animation_v4cf6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.2]
+}
+
+[sub_resource type="Animation" id="Animation_34sf2"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.8, 1.0, 0.8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bq1mw"]
+_data = {
+"RESET": SubResource("Animation_v4cf6"),
+"idle": SubResource("Animation_34sf2")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lic7d"]
+atlas = ExtResource("1_x654e")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7wfnw"]
+atlas = ExtResource("1_x654e")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6e3s"]
+atlas = ExtResource("1_x654e")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtsxe"]
+atlas = ExtResource("1_x654e")
+region = Rect2(48, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gpauo"]
+atlas = ExtResource("1_x654e")
+region = Rect2(64, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0sjs1"]
+atlas = ExtResource("1_x654e")
+region = Rect2(80, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c3ocd"]
+atlas = ExtResource("1_x654e")
+region = Rect2(96, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_be2g3"]
+atlas = ExtResource("1_x654e")
+region = Rect2(112, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_by70m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lic7d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7wfnw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c6e3s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vtsxe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gpauo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0sjs1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c3ocd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_be2g3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="FireTorch" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(0, 4)
+amount = 15
+sub_emitter = NodePath(".")
+process_material = SubResource("ParticleProcessMaterial_eeadp")
+lifetime = 2.0
+
+[node name="Animation" type="AnimationPlayer" parent="." groups=["animation"]]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_bq1mw")
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_by70m")
+autoplay = "default"
+frame_progress = 0.884575
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, 16)
+energy = 0.2
+texture = ExtResource("2_0vtdm")
+texture_scale = 0.3

@@ -1,0 +1,186 @@
+[gd_scene load_steps=16 format=3 uid="uid://cqnwylvb0qpj0"]
+
+[ext_resource type="PackedScene" uid="uid://d1d435fqsjpx6" path="res://scenes/heros/player_template.tscn" id="1_rvjik"]
+[ext_resource type="Script" path="res://scripts/characters/heros/wizard/wizard_player.gd" id="2_0uobx"]
+[ext_resource type="Texture2D" uid="uid://35esy28j5q8o" path="res://assets/characters/heros/wizard.png" id="2_uejun"]
+[ext_resource type="Texture2D" uid="uid://b3b6k7gq3ybkn" path="res://assets/tileset/light.png" id="4_g5j72"]
+
+[sub_resource type="Animation" id="Animation_2wrvj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_vtrnd"]
+resource_name = "attack_left"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15, 16]
+}
+
+[sub_resource type="Animation" id="Animation_wikl5"]
+resource_name = "attack_right"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15, 16]
+}
+
+[sub_resource type="Animation" id="Animation_rqcra"]
+resource_name = "dead"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [20, 21, 22, 23, 24, 25, 26]
+}
+
+[sub_resource type="Animation" id="Animation_wtfwk"]
+resource_name = "hit"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [17, 18, 18, 19]
+}
+
+[sub_resource type="Animation" id="Animation_yxl54"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_lp22b"]
+resource_name = "run"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vh3qb"]
+_data = {
+"RESET": SubResource("Animation_2wrvj"),
+"attack_left": SubResource("Animation_vtrnd"),
+"attack_right": SubResource("Animation_wikl5"),
+"dead": SubResource("Animation_rqcra"),
+"hit": SubResource("Animation_wtfwk"),
+"idle": SubResource("Animation_yxl54"),
+"run": SubResource("Animation_lp22b")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g0d84"]
+size = Vector2(20, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3hxgi"]
+size = Vector2(12, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ok4or"]
+size = Vector2(21, 28)
+
+[node name="WizardPlayer" instance=ExtResource("1_rvjik")]
+script = ExtResource("2_0uobx")
+max_speed = 70
+
+[node name="Texture" parent="." index="0"]
+texture = ExtResource("2_uejun")
+hframes = 4
+vframes = 7
+
+[node name="Animation" parent="." index="1"]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_vh3qb")
+}
+
+[node name="CollisionDamageArea" parent="DamageArea" index="0"]
+visible = false
+position = Vector2(-4, 3)
+shape = SubResource("RectangleShape2D_g0d84")
+
+[node name="CollisionAttackArea" parent="AttackArea" index="0"]
+visible = false
+position = Vector2(-2, -4)
+shape = SubResource("RectangleShape2D_3hxgi")
+disabled = true
+
+[node name="Collision" parent="." index="4"]
+position = Vector2(-2.5, 2)
+shape = SubResource("RectangleShape2D_ok4or")
+
+[node name="Light" parent="." index="6"]
+texture = ExtResource("4_g5j72")
+
+[node name="Stats" parent="." index="7"]
+max_health = 20
+base_attack = 6
+offset = 30.0
+
+[node name="HealthBar" parent="." index="8"]
+position = Vector2(-3, -22)
+
+[node name="BonusTimeBar" parent="." index="9"]
+position = Vector2(-16, -21)
+
+[node name="ActionkAudioSfx" parent="AudioNodes" index="1"]
+volume_db = -10.0

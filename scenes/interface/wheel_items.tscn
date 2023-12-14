@@ -1,0 +1,267 @@
+[gd_scene load_steps=11 format=3 uid="uid://dj78kk5fjvso8"]
+
+[ext_resource type="Texture2D" uid="uid://cl36hhsrhodwu" path="res://assets/interface/wheel fortune.png" id="1_hptv2"]
+[ext_resource type="Script" path="res://scripts/interface/wheel_items.gd" id="1_xbwow"]
+[ext_resource type="Shader" path="res://shaders/wheel_items.gdshader" id="2_ig8hp"]
+[ext_resource type="Texture2D" uid="uid://0uububdqg2km" path="res://assets/interface/wheel fortune-suporte.png" id="3_1orka"]
+[ext_resource type="Texture2D" uid="uid://cv8nhqu1m4r0m" path="res://assets/interface/wheel fortune-seta.png" id="4_xg265"]
+[ext_resource type="FontFile" uid="uid://ck3faun43yoik" path="res://assets/fonts/Halloween pixel.otf" id="6_qilpy"]
+[ext_resource type="Script" path="res://scripts/audio/audio_sfx.gd" id="7_lc4n1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1etqw"]
+shader = ExtResource("2_ig8hp")
+shader_parameter/limit = 0.2
+shader_parameter/blur = 2.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j1qnq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8duhf"]
+size = Vector2(14, 39)
+
+[node name="WheelItems" type="CanvasLayer" node_paths=PackedStringArray("whell_node", "timer", "node_items")]
+scale = Vector2(0.1, 0.1)
+transform = Transform2D(0.1, 0, 0, 0.1, 0, 0)
+script = ExtResource("1_xbwow")
+whell_node = NodePath("NodeWheel")
+timer = NodePath("Timer")
+node_items = NodePath("NodeWheel/NodeItems")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_1etqw")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.164706, 0.164706, 0.164706, 0.6)
+
+[node name="NodeWheel" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 210.0
+offset_top = 120.0
+offset_right = 250.0
+offset_bottom = 160.0
+
+[node name="TextureWheel" type="TextureRect" parent="NodeWheel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -86.5
+offset_top = -87.0
+offset_right = 46.5
+offset_bottom = 47.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+texture = ExtResource("1_hptv2")
+
+[node name="NodeItems" type="Control" parent="NodeWheel"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureItem1" type="TextureRect" parent="NodeWheel/NodeItems"]
+layout_mode = 0
+offset_left = -9.0
+offset_top = -48.0
+offset_right = 7.0
+offset_bottom = -32.0
+rotation = 0.401426
+pivot_offset = Vector2(9, 48)
+
+[node name="AreaCheck" type="Area2D" parent="NodeWheel/NodeItems/TextureItem1"]
+collision_layer = 8
+collision_mask = 64
+
+[node name="Collision" type="CollisionShape2D" parent="NodeWheel/NodeItems/TextureItem1/AreaCheck"]
+position = Vector2(7.95976, 7.15985)
+shape = SubResource("RectangleShape2D_j1qnq")
+disabled = true
+
+[node name="TextureItem2" type="TextureRect" parent="NodeWheel/NodeItems"]
+layout_mode = 0
+offset_left = -9.0
+offset_top = -48.0
+offset_right = 7.0
+offset_bottom = -32.0
+rotation = 1.18682
+pivot_offset = Vector2(9, 48)
+
+[node name="AreaCheck" type="Area2D" parent="NodeWheel/NodeItems/TextureItem2"]
+position = Vector2(0.252106, 0.245682)
+collision_layer = 8
+collision_mask = 64
+
+[node name="Collision" type="CollisionShape2D" parent="NodeWheel/NodeItems/TextureItem2/AreaCheck"]
+position = Vector2(7.95976, 7.15985)
+shape = SubResource("RectangleShape2D_j1qnq")
+disabled = true
+
+[node name="TextureItem3" type="TextureRect" parent="NodeWheel/NodeItems"]
+layout_mode = 0
+offset_left = -9.0
+offset_top = -48.0
+offset_right = 7.0
+offset_bottom = -32.0
+rotation = 1.97222
+pivot_offset = Vector2(9, 48)
+
+[node name="AreaCheck" type="Area2D" parent="NodeWheel/NodeItems/TextureItem3"]
+position = Vector2(0.370453, -0.482269)
+collision_layer = 8
+collision_mask = 64
+
+[node name="Collision" type="CollisionShape2D" parent="NodeWheel/NodeItems/TextureItem3/AreaCheck"]
+position = Vector2(7.95976, 7.15985)
+shape = SubResource("RectangleShape2D_j1qnq")
+disabled = true
+
+[node name="TextureItem4" type="TextureRect" parent="NodeWheel/NodeItems"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 0
+offset_left = -9.0
+offset_top = -48.0
+offset_right = 7.0
+offset_bottom = -32.0
+rotation = 2.75762
+pivot_offset = Vector2(9, 48)
+
+[node name="AreaCheck" type="Area2D" parent="NodeWheel/NodeItems/TextureItem4"]
+position = Vector2(0.0741272, -1.98329)
+collision_layer = 8
+collision_mask = 64
+
+[node name="Collision" type="CollisionShape2D" parent="NodeWheel/NodeItems/TextureItem4/AreaCheck"]
+position = Vector2(7.95976, 7.15985)
+shape = SubResource("RectangleShape2D_j1qnq")
+disabled = true
+
+[node name="TextureItem5" type="TextureRect" parent="NodeWheel/NodeItems"]
+layout_mode = 0
+offset_left = -9.0
+offset_top = -48.0
+offset_right = 7.0
+offset_bottom = -32.0
+rotation = 3.54302
+pivot_offset = Vector2(9, 48)
+
+[node name="AreaCheck" type="Area2D" parent="NodeWheel/NodeItems/TextureItem5"]
+position = Vector2(1.29097, -0.873016)
+collision_layer = 8
+collision_mask = 64
+
+[node name="Collision" type="CollisionShape2D" parent="NodeWheel/NodeItems/TextureItem5/AreaCheck"]
+position = Vector2(7.95976, 7.15985)
+shape = SubResource("RectangleShape2D_j1qnq")
+disabled = true
+
+[node name="TextureItem6" type="TextureRect" parent="NodeWheel/NodeItems"]
+layout_mode = 0
+offset_left = -9.0
+offset_top = -48.0
+offset_right = 7.0
+offset_bottom = -32.0
+rotation = 4.32842
+pivot_offset = Vector2(9, 48)
+
+[node name="AreaCheck" type="Area2D" parent="NodeWheel/NodeItems/TextureItem6"]
+position = Vector2(1.9285, -1.23409)
+collision_layer = 8
+collision_mask = 64
+
+[node name="Collision" type="CollisionShape2D" parent="NodeWheel/NodeItems/TextureItem6/AreaCheck"]
+position = Vector2(7.95976, 7.15985)
+shape = SubResource("RectangleShape2D_j1qnq")
+disabled = true
+
+[node name="TextureItem7" type="TextureRect" parent="NodeWheel/NodeItems"]
+layout_mode = 0
+offset_left = -9.0
+offset_top = -48.0
+offset_right = 7.0
+offset_bottom = -32.0
+rotation = 5.11381
+pivot_offset = Vector2(9, 48)
+
+[node name="AreaCheck" type="Area2D" parent="NodeWheel/NodeItems/TextureItem7"]
+position = Vector2(0.370453, -0.482269)
+collision_layer = 8
+collision_mask = 64
+
+[node name="Collision" type="CollisionShape2D" parent="NodeWheel/NodeItems/TextureItem7/AreaCheck"]
+position = Vector2(7.95976, 7.15985)
+shape = SubResource("RectangleShape2D_j1qnq")
+disabled = true
+
+[node name="TextureItem8" type="TextureRect" parent="NodeWheel/NodeItems"]
+layout_mode = 0
+offset_left = -9.0
+offset_top = -48.0
+offset_right = 7.0
+offset_bottom = -32.0
+rotation = 5.89921
+pivot_offset = Vector2(9, 48)
+
+[node name="AreaCheck" type="Area2D" parent="NodeWheel/NodeItems/TextureItem8"]
+position = Vector2(1.00132, -1.60869)
+collision_layer = 8
+collision_mask = 64
+
+[node name="Collision" type="CollisionShape2D" parent="NodeWheel/NodeItems/TextureItem8/AreaCheck"]
+position = Vector2(7.95976, 7.15985)
+shape = SubResource("RectangleShape2D_j1qnq")
+disabled = true
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureSupport" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_left = 143.0
+offset_top = 53.0
+offset_right = 276.0
+offset_bottom = 187.0
+texture = ExtResource("3_1orka")
+
+[node name="TextureArrow" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_left = 143.0
+offset_top = 53.0
+offset_right = 276.0
+offset_bottom = 187.0
+texture = ExtResource("4_xg265")
+
+[node name="AreaArrow" type="Area2D" parent="Control/TextureArrow"]
+collision_layer = 64
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/TextureArrow/AreaArrow"]
+position = Vector2(66, 19.5)
+shape = SubResource("RectangleShape2D_8duhf")
+
+[node name="SpellLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_top = 194.0
+offset_right = 424.0
+offset_bottom = 217.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_qilpy")
+horizontal_alignment = 1
+
+[node name="AudioSfx" type="AudioStreamPlayer" parent="."]
+bus = &"Sfx"
+script = ExtResource("7_lc4n1")
+
+[connection signal="velocity_changed" from="." to="." method="_on_velocity_changed"]
+[connection signal="timeout" from="Timer" to="." method="on_timer_timeout"]
+[connection signal="area_entered" from="Control/TextureArrow/AreaArrow" to="." method="on_area_arrow_entered"]

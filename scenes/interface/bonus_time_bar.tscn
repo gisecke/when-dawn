@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1mlpkbx5pcbs"]
+
+[ext_resource type="Script" path="res://scripts/interface/bonus_time_bar.gd" id="1_n8i2m"]
+[ext_resource type="Texture2D" uid="uid://cx1fo6mkpljbn" path="res://assets/interface/bonus_time_bar.png" id="1_qmbie"]
+
+[node name="BonusTimeBar" type="Node2D" node_paths=PackedStringArray("bonus_bar")]
+script = ExtResource("1_n8i2m")
+bonus_bar = NodePath("BonusBar")
+
+[node name="BonusBar" type="TextureProgressBar" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 26.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_progress = ExtResource("1_qmbie")

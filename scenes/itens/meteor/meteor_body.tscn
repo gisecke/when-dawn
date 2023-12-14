@@ -1,0 +1,90 @@
+[gd_scene load_steps=12 format=3 uid="uid://d2t6namt5tymf"]
+
+[ext_resource type="Material" uid="uid://dp8lgt2jgrmrx" path="res://particles/fire_meteor_particles.tres" id="1_dhohj"]
+[ext_resource type="Script" path="res://scripts/itens/meteor/meteor_script.gd" id="1_tssp7"]
+[ext_resource type="Material" uid="uid://b2n75reysnogj" path="res://particles/explosion_meteor_particletres.tres" id="2_pux41"]
+[ext_resource type="Texture2D" uid="uid://c01w11xw2m1il" path="res://assets/particles/smoke.png" id="4_nuv3g"]
+
+[sub_resource type="Gradient" id="Gradient_gu7vm"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fi2yf"]
+gradient = SubResource("Gradient_gu7vm")
+
+[sub_resource type="Curve" id="Curve_5rv4c"]
+_data = [Vector2(0, 0.494737), 0.0, 0.0, 0, 0, Vector2(0.997549, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ikco7"]
+curve = SubResource("Curve_5rv4c")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pn3mv"]
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 120.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_min = 25.0
+damping_max = 25.0
+scale_curve = SubResource("CurveTexture_ikco7")
+color_ramp = SubResource("GradientTexture1D_fi2yf")
+turbulence_enabled = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jjkf3"]
+radius = 7.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xw5gj"]
+size = Vector2(5, 5)
+
+[node name="MeteorBody" type="RigidBody2D" node_paths=PackedStringArray("sprite_texture", "floor_area", "explosion_particles", "smoke_particles", "fire_particles")]
+collision_layer = 8
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_tssp7")
+texture_list = ["res://assets/itens/meteors1.png", "res://assets/itens/meteors2.png", "res://assets/itens/meteors3.png", "res://assets/itens/meteors4.png"]
+sprite_texture = NodePath("Texture")
+floor_area = NodePath("FloorArea")
+explosion_particles = NodePath("ExplosionParticles")
+smoke_particles = NodePath("SmokeParticles")
+fire_particles = NodePath("FireParticles")
+
+[node name="FireParticles" type="GPUParticles2D" parent="."]
+visible = false
+amount = 150
+process_material = ExtResource("1_dhohj")
+
+[node name="Texture" type="Sprite2D" parent="."]
+
+[node name="SmokeParticles" type="GPUParticles2D" parent="."]
+texture_filter = 1
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_pn3mv")
+texture = ExtResource("4_nuv3g")
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+
+[node name="ExplosionParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 50
+process_material = ExtResource("2_pux41")
+one_shot = true
+explosiveness = 1.0
+
+[node name="FloorArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionFloorArea" type="CollisionShape2D" parent="FloorArea"]
+visible = false
+shape = SubResource("CircleShape2D_jjkf3")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_xw5gj")
+
+[connection signal="area_entered" from="FloorArea" to="." method="on_floor_area_entered"]
+[connection signal="area_exited" from="FloorArea" to="." method="on_floor_area_exited"]

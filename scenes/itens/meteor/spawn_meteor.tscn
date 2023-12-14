@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://lkut7yqkbmpu"]
+
+[ext_resource type="Script" path="res://scripts/itens/meteor/spawn_meteor.gd" id="1_o7rt5"]
+[ext_resource type="PackedScene" uid="uid://d2lpy4omfjvq7" path="res://scenes/heros/spell/stats.tscn" id="2_6eayb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jykst"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_svodi"]
+radius = 50.0
+
+[node name="SpawnMeteor" type="Marker2D" node_paths=PackedStringArray("attack_area_collision")]
+script = ExtResource("1_o7rt5")
+attack_area_collision = NodePath("AttackArea/CollisionShape2D")
+radius = 200.0
+
+[node name="AreaFloor" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 8
+
+[node name="Collision" type="CollisionShape2D" parent="AreaFloor"]
+visible = false
+shape = SubResource("CircleShape2D_jykst")
+
+[node name="AttackArea" type="Area2D" parent="."]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+shape = SubResource("CircleShape2D_svodi")
+disabled = true
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="Stats" parent="." instance=ExtResource("2_6eayb")]
+base_attack = 10
+
+[connection signal="body_entered" from="AreaFloor" to="." method="on_area_floor_entered"]

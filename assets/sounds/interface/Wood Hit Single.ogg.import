@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cgqbtg2dkyqfh"
+path="res://.godot/imported/Wood Hit Single.ogg-92cb075cf931dd06aafcd5d87509c07d.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/interface/Wood Hit Single.ogg"
+dest_files=["res://.godot/imported/Wood Hit Single.ogg-92cb075cf931dd06aafcd5d87509c07d.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

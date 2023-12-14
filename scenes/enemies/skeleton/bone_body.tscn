@@ -1,0 +1,152 @@
+[gd_scene load_steps=9 format=3 uid="uid://um4g230ydbli"]
+
+[ext_resource type="Texture2D" uid="uid://k7qi2uttsiey" path="res://assets/characters/enemies/skeleton/bone.png" id="1_bg5dn"]
+[ext_resource type="Script" path="res://scripts/characters/enemies/skeleton/bone_body.gd" id="1_rhllv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_phia5"]
+radius = 3.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4g0f7"]
+radius = 8.0
+
+[sub_resource type="Animation" id="Animation_ea81d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ToHitArea:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_fmsk4"]
+resource_name = "kill"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [false],
+"method": &"set_physics_process"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ToHitArea:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ot8cg"]
+resource_name = "play"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0f0qf"]
+_data = {
+"RESET": SubResource("Animation_ea81d"),
+"kill": SubResource("Animation_fmsk4"),
+"play": SubResource("Animation_ot8cg")
+}
+
+[node name="BoneBody" type="RigidBody2D" node_paths=PackedStringArray("animation", "life_timer")]
+collision_layer = 4
+collision_mask = 3
+gravity_scale = 0.0
+script = ExtResource("1_rhllv")
+animation = NodePath("Animation")
+life_timer = NodePath("LifeTimer")
+force = 120
+base_attack = 2
+
+[node name="Texture" type="Sprite2D" parent="."]
+texture = ExtResource("1_bg5dn")
+hframes = 4
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_phia5")
+
+[node name="ToHitArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 3
+
+[node name="ToHitCollision" type="CollisionShape2D" parent="ToHitArea"]
+shape = SubResource("CircleShape2D_4g0f7")
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0f0qf")
+}
+
+[node name="LifeTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="body_entered" from="ToHitArea" to="." method="on_to_hit_area_entered"]
+[connection signal="animation_finished" from="Animation" to="." method="_on_animation_animation_finished"]
+[connection signal="timeout" from="LifeTimer" to="." method="on_life_timer_timeout"]

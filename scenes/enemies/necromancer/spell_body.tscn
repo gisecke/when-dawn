@@ -1,0 +1,132 @@
+[gd_scene load_steps=9 format=3 uid="uid://dj620uysk1odg"]
+
+[ext_resource type="Texture2D" uid="uid://y77ukj5x7jd8" path="res://assets/characters/enemies/undead/spell_ball.png" id="1_i7f8x"]
+[ext_resource type="Script" path="res://scripts/characters/enemies/necromancer/spell_body.gd" id="1_mw13t"]
+
+[sub_resource type="Animation" id="Animation_qc3pl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Texture:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_hw03l"]
+resource_name = "kill"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [false],
+"method": &"set_physics_process"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_225ib"]
+resource_name = "play"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1sxag"]
+_data = {
+"RESET": SubResource("Animation_qc3pl"),
+"kill": SubResource("Animation_hw03l"),
+"play": SubResource("Animation_225ib")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kxgd8"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0rvdt"]
+radius = 8.0
+
+[node name="SpellBody" type="RigidBody2D" node_paths=PackedStringArray("animation", "texture", "life_timer")]
+collision_layer = 4
+collision_mask = 3
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("1_mw13t")
+animation = NodePath("Animation")
+texture = NodePath("Texture")
+life_timer = NodePath("LifeTimer")
+force = 120
+base_attack = 2
+
+[node name="Texture" type="Sprite2D" parent="."]
+texture = ExtResource("1_i7f8x")
+flip_h = true
+hframes = 5
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+autoplay = "play"
+libraries = {
+"": SubResource("AnimationLibrary_1sxag")
+}
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_kxgd8")
+
+[node name="ToHitArea" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="ToHitCollision" type="CollisionShape2D" parent="ToHitArea"]
+shape = SubResource("CircleShape2D_0rvdt")
+
+[node name="LifeTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="animation_finished" from="Animation" to="." method="on_animation_finished"]
+[connection signal="body_entered" from="ToHitArea" to="." method="on_to_hit_area_body_entered"]
+[connection signal="timeout" from="LifeTimer" to="." method="on_life_timer_timeout"]

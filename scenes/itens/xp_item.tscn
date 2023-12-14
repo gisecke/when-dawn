@@ -1,0 +1,140 @@
+[gd_scene load_steps=12 format=3 uid="uid://daadfqp2j8b2w"]
+
+[ext_resource type="Texture2D" uid="uid://b4df7fiwhc7f6" path="res://assets/itens/xp.png" id="1_qw53k"]
+[ext_resource type="Script" path="res://scripts/itens/xp/xp_item.gd" id="1_rx2hr"]
+[ext_resource type="Script" path="res://scripts/audio/audio_sfx.gd" id="3_kns6k"]
+[ext_resource type="AudioStream" uid="uid://b5e8qvml6hekj" path="res://assets/sounds/interface/xp win.ogg" id="3_p8fsi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jhexs"]
+radius = 14.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y4wrl"]
+size = Vector2(4, 5)
+
+[sub_resource type="Animation" id="Animation_mgrm3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TouchArea:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_pa0mk"]
+resource_name = "explosion"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TouchArea:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_fll8n"]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hre60"]
+_data = {
+"RESET": SubResource("Animation_mgrm3"),
+"explosion": SubResource("Animation_pa0mk"),
+"idle": SubResource("Animation_fll8n")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wtbg1"]
+size = Vector2(4, 5)
+
+[node name="XpItem" type="RigidBody2D" node_paths=PackedStringArray("animation", "audio_sfx")]
+collision_layer = 8
+collision_mask = 2
+gravity_scale = 0.0
+lock_rotation = true
+freeze_mode = 1
+script = ExtResource("1_rx2hr")
+force = Vector2(1, 1)
+animation = NodePath("Animation")
+audio_sfx = NodePath("AudioSfx")
+
+[node name="Texture" type="Sprite2D" parent="."]
+texture = ExtResource("1_qw53k")
+hframes = 4
+vframes = 2
+
+[node name="CatchArea" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 3
+
+[node name="CatchAreaCollision" type="CollisionShape2D" parent="CatchArea"]
+shape = SubResource("CircleShape2D_jhexs")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_y4wrl")
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hre60")
+}
+
+[node name="TouchArea" type="Area2D" parent="."]
+
+[node name="CollisionTouchArea" type="CollisionShape2D" parent="TouchArea"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_wtbg1")
+
+[node name="AudioSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_p8fsi")
+bus = &"Sfx"
+script = ExtResource("3_kns6k")
+
+[connection signal="body_entered" from="CatchArea" to="." method="on_catch_area_entered"]
+[connection signal="body_entered" from="TouchArea" to="." method="on_touch_area_entered"]

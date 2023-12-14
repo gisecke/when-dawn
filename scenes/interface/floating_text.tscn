@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqqugbvnpnwfm"]
+
+[ext_resource type="FontFile" uid="uid://cxwy1ihwqhxw0" path="res://assets/fonts/upheavtt.ttf" id="1_id1p5"]
+[ext_resource type="Script" path="res://scripts/interface/floating_text.gd" id="2_dwjbg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_y7i54"]
+font_size = 11
+
+[node name="FloatingText" type="Label"]
+offset_right = 10.0
+offset_bottom = 23.0
+scale = Vector2(0.01, 0.01)
+theme_override_fonts/font = ExtResource("1_id1p5")
+text = "12"
+label_settings = SubResource("LabelSettings_y7i54")
+script = ExtResource("2_dwjbg")
+damage_color = Color(0.705882, 0.12549, 0.164706, 1)
+exp_color = Color(1, 0.835294, 0.254902, 1)
+heal_color = Color(0.34902, 0.756863, 0.207843, 1)
+offset_x = 10.0

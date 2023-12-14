@@ -1,0 +1,390 @@
+[gd_scene load_steps=24 format=3 uid="uid://61du52bj7yry"]
+
+[ext_resource type="Texture2D" uid="uid://bv6g2o6nmtptj" path="res://assets/characters/heros/barbarian.png" id="1_imx48"]
+[ext_resource type="Script" path="res://scripts/characters/heros/Barbarian/barbarian.gd" id="1_ten10"]
+[ext_resource type="Script" path="res://scripts/characters/heros/Barbarian/texture.gd" id="3_xt4ig"]
+[ext_resource type="Script" path="res://scripts/characters/heros/player_template/camera_script.gd" id="4_ul8in"]
+[ext_resource type="Texture2D" uid="uid://b3b6k7gq3ybkn" path="res://assets/tileset/light.png" id="4_vrejj"]
+[ext_resource type="Script" path="res://scripts/characters/heros/Barbarian/barbarian_stats.gd" id="5_128xk"]
+[ext_resource type="PackedScene" uid="uid://bnwelkt0285m2" path="res://scenes/interface/health_bar.tscn" id="6_4weyi"]
+[ext_resource type="PackedScene" uid="uid://d1mlpkbx5pcbs" path="res://scenes/interface/bonus_time_bar.tscn" id="8_kymd4"]
+[ext_resource type="Script" path="res://scripts/audio/audio_sfx.gd" id="9_2la25"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_15o5u"]
+size = Vector2(17, 32.75)
+
+[sub_resource type="Animation" id="Animation_xqtrm"]
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackArea/Collision:shape")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("RectangleShape2D_15o5u")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackArea/Collision:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(29, 7.5)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AttackArea/Collision:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_4i2k6"]
+resource_name = "attack_left"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [22, 23, 24, 25, 26]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackArea/Collision:shape")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("RectangleShape2D_15o5u")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackArea/Collision:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-22.5, 3.625)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AttackArea/Collision:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_6lcag"]
+resource_name = "attack_right"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [22, 23, 24, 25, 26]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackArea/Collision:shape")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("RectangleShape2D_15o5u")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackArea/Collision:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(20, 3.75)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AttackArea/Collision:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_3f1ok"]
+resource_name = "dead"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [44, 45, 46, 47, 48, 49]
+}
+
+[sub_resource type="Animation" id="Animation_1i0kt"]
+resource_name = "hit"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [33, 34, 34, 35]
+}
+
+[sub_resource type="Animation" id="Animation_ktuvd"]
+resource_name = "idle"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+}
+
+[sub_resource type="Animation" id="Animation_6tjrl"]
+resource_name = "run"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [11, 12, 13, 14, 15, 16]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gibgs"]
+_data = {
+"RESET": SubResource("Animation_xqtrm"),
+"attack_left": SubResource("Animation_4i2k6"),
+"attack_right": SubResource("Animation_6lcag"),
+"dead": SubResource("Animation_3f1ok"),
+"hit": SubResource("Animation_1i0kt"),
+"idle": SubResource("Animation_ktuvd"),
+"run": SubResource("Animation_6tjrl")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k123p"]
+size = Vector2(12, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5gpnr"]
+size = Vector2(15, 33)
+
+[sub_resource type="Animation" id="Animation_loty0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_27c1d"]
+resource_name = "invencibility"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pnmgh"]
+_data = {
+"RESET": SubResource("Animation_loty0"),
+"invencibility": SubResource("Animation_27c1d")
+}
+
+[node name="BarbarianPlayer" type="CharacterBody2D" node_paths=PackedStringArray("walking_audio_sfx", "action_audio_sfx")]
+collision_mask = 34
+motion_mode = 1
+script = ExtResource("1_ten10")
+max_speed = 100
+walking_audio_sfx = NodePath("AudioNodes/WalkingAudioSfx")
+action_audio_sfx = NodePath("AudioNodes/ActionkAudioSfx")
+
+[node name="Texture" type="Sprite2D" parent="." node_paths=PackedStringArray("player", "animation", "animation_invencibility", "attack_area_collision", "damage_area_collision", "stats") groups=["animation"]]
+texture = ExtResource("1_imx48")
+hframes = 11
+vframes = 5
+script = ExtResource("3_xt4ig")
+player = NodePath("..")
+animation = NodePath("../Animation")
+animation_invencibility = NodePath("../AnimationInvencibility")
+attack_area_collision = NodePath("../AttackArea/Collision")
+damage_area_collision = NodePath("../DamageArea/Collision")
+stats = NodePath("../Stats")
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_gibgs")
+}
+
+[node name="DamageArea" type="Area2D" parent="."]
+collision_mask = 4
+
+[node name="Collision" type="CollisionShape2D" parent="DamageArea"]
+position = Vector2(0, 4.5)
+shape = SubResource("RectangleShape2D_k123p")
+
+[node name="AttackArea" type="Area2D" parent="."]
+collision_mask = 4
+
+[node name="Collision" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(29, 7.5)
+shape = SubResource("RectangleShape2D_15o5u")
+disabled = true
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-1.5, 3.5)
+shape = SubResource("RectangleShape2D_5gpnr")
+
+[node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("timer")]
+script = ExtResource("4_ul8in")
+timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="Camera"]
+one_shot = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(5, -3)
+energy = 0.5
+texture = ExtResource("4_vrejj")
+
+[node name="Stats" type="Node2D" parent="." node_paths=PackedStringArray("timer_bonus", "player", "animation_player", "health_bar", "bonus_timer_bar") groups=["stats"]]
+script = ExtResource("5_128xk")
+timer_bonus = NodePath("TimerBonus")
+player = NodePath("..")
+animation_player = NodePath("../Animation")
+health_bar = NodePath("../HealthBar")
+bonus_timer_bar = NodePath("../BonusTimeBar")
+max_health = 45
+base_attack = 4
+offset = 30.0
+
+[node name="TimerBonus" type="Timer" parent="Stats"]
+wait_time = 30.0
+one_shot = true
+
+[node name="HealthBar" parent="." instance=ExtResource("6_4weyi")]
+position = Vector2(0, -18)
+
+[node name="AnimationInvencibility" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pnmgh")
+}
+
+[node name="BonusTimeBar" parent="." instance=ExtResource("8_kymd4")]
+position = Vector2(-13, -17)
+
+[node name="AudioNodes" type="Node2D" parent="."]
+
+[node name="WalkingAudioSfx" type="AudioStreamPlayer" parent="AudioNodes"]
+bus = &"Sfx"
+script = ExtResource("9_2la25")
+
+[node name="ActionkAudioSfx" type="AudioStreamPlayer" parent="AudioNodes"]
+bus = &"Sfx"
+script = ExtResource("9_2la25")
+
+[connection signal="animation_finished" from="Animation" to="Texture" method="on_animation_finished"]
+[connection signal="area_entered" from="DamageArea" to="." method="_on_damage_area_entered"]
+[connection signal="area_entered" from="AttackArea" to="." method="on_attack_area_entered"]
+[connection signal="timeout" from="Camera/Timer" to="Camera" method="on_timer_timeout"]
+[connection signal="timeout" from="Stats/TimerBonus" to="Stats" method="on_timer_bonus_timeout"]
+[connection signal="animation_finished" from="AnimationInvencibility" to="Texture" method="on_animation_invencibility_finished"]

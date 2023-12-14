@@ -1,0 +1,73 @@
+[gd_scene load_steps=5 format=3 uid="uid://bscgexv8f6s8c"]
+
+[ext_resource type="Texture2D" uid="uid://cr1gqjp6fshw1" path="res://assets/interface/container.png" id="1_6p83t"]
+[ext_resource type="Script" path="res://scripts/interface/hud.gd" id="1_wbwh2"]
+[ext_resource type="Texture2D" uid="uid://cpqm7b0cypauf" path="res://assets/interface/exp_bar.png" id="2_fijki"]
+[ext_resource type="FontFile" uid="uid://ck3faun43yoik" path="res://assets/fonts/Halloween pixel.otf" id="3_412ov"]
+
+[node name="Hud" type="CanvasLayer" node_paths=PackedStringArray("exp_bar", "score_text", "level_text") groups=["hud"]]
+script = ExtResource("1_wbwh2")
+exp_bar = NodePath("exp_container/ExpProgressBar")
+score_text = NodePath("ScoreText")
+level_text = NodePath("LevelText")
+
+[node name="exp_container" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_6p83t")
+
+[node name="ExpProgressBar" type="TextureProgressBar" parent="exp_container"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -188.5
+offset_top = -102.0
+offset_right = 188.5
+offset_bottom = -90.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 70.0
+texture_progress = ExtResource("2_fijki")
+
+[node name="ScoreLabel" type="Label" parent="."]
+texture_filter = 1
+offset_left = 259.0
+offset_top = 34.0
+offset_right = 310.0
+offset_bottom = 60.0
+theme_override_fonts/font = ExtResource("3_412ov")
+theme_override_font_sizes/font_size = 17
+text = "Score:"
+
+[node name="ScoreText" type="Label" parent="."]
+texture_filter = 1
+offset_left = 316.0
+offset_top = 35.0
+offset_right = 403.0
+offset_bottom = 61.0
+theme_override_fonts/font = ExtResource("3_412ov")
+theme_override_font_sizes/font_size = 16
+text = "0"
+
+[node name="LevelLabel" type="Label" parent="."]
+texture_filter = 1
+offset_left = 23.0
+offset_top = 36.0
+offset_right = 61.0
+offset_bottom = 51.0
+theme_override_fonts/font = ExtResource("3_412ov")
+theme_override_font_sizes/font_size = 12
+text = "Level:"
+
+[node name="LevelText" type="Label" parent="."]
+texture_filter = 1
+offset_left = 66.0
+offset_top = 36.0
+offset_right = 153.0
+offset_bottom = 51.0
+theme_override_fonts/font = ExtResource("3_412ov")
+theme_override_font_sizes/font_size = 12
+text = "0"
